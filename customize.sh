@@ -243,7 +243,22 @@ CUR=`cat $FILE`
 ui_print "- Current $FILE"
 ui_print "  = $CUR"
 ui_print " "
-if [ "$VAL" == def ]; then
+if [ "$VAL" ] && [ "$VAL" != def ]; then
+  if [ -f $FILE ]; then
+    ui_print "- Changes $FILE"
+    ui_print "  to $VAL"
+    [ "$BOOTMODE" == true ] && echo "$VAL" > $FILE
+    sed -i "s|SWPS=|SWPS=$VAL|g" $MODPATH/service.sh
+    if [ "$BOOTMODE" == true ]; then
+      ui_print "  This change does not require reboot."
+    fi
+    ui_print " "
+  else
+    ui_print "- This kernel does not support"
+    ui_print "  $FILE"
+    ui_print " "
+  fi
+else
   if [ "$BOOTMODE" == true ] && [ -f $DEFFILE ]; then
     SWPSDEF=`awk '/SWPSDEF/ {print $2}' $DEFFILE | sed 's|SWPSDEF=||g'`
     if [ "$SWPSDEF" ] && [ "$SWPSDEF" != "$CUR" ]; then
@@ -253,27 +268,6 @@ if [ "$VAL" == def ]; then
       ui_print "  This change does not require reboot."
       ui_print " "
     fi
-  fi
-else
-  if [ -f $FILE ]; then
-    ui_print "- Changes $FILE"
-    if [ "$VAL" ]; then
-      ui_print "  to $VAL"
-      [ "$BOOTMODE" == true ] && echo "$VAL" > $FILE
-      sed -i "s|SWPS=|SWPS=$VAL|g" $MODPATH/service.sh
-    else
-      ui_print "  to 100"
-      [ "$BOOTMODE" == true ] && echo 100 > $FILE
-      sed -i 's|SWPS=|SWPS=100|g' $MODPATH/service.sh
-    fi
-    if [ "$BOOTMODE" == true ]; then
-      ui_print "  This change does not require reboot."
-    fi
-    ui_print " "
-  else
-    ui_print "- This kernel does not support"
-    ui_print "  $FILE"
-    ui_print " "
   fi
 fi
 
@@ -384,16 +378,25 @@ if ! grep -q $PROP $LMKD\
   PROP=$PROP2
 fi
 CUR=`getprop $PROP`
-ui_print "- Current $PROP"
+ui_print "- Current"
+ui_print "  $PROP"
 ui_print "  = $CUR"
 ui_print " "
 if [ "$VAL" ] && [ "$VAL" != def ]; then
   if grep -q $PROP $LMKD; then
-    ui_print "- Changes $PROP"
-    ui_print "  to $VAL"
+    if [ "$VAL" == unset ]; then
+      ui_print "- Unsets"
+      ui_print "  $PROP"
+    else
+      ui_print "- Changes"
+      ui_print "  $PROP"
+      ui_print "  to $VAL"
+    fi
     if [ "$BOOTMODE" == true ]; then
       resetprop -p --delete $PROP
-      resetprop -n $PROP "$VAL"
+      if [ "$VAL" != unset ]; then
+        resetprop -n $PROP "$VAL"
+      fi
       resetprop lmkd.reinit 1
       ui_print "  This change does not require reboot."
     fi
@@ -438,16 +441,25 @@ if ! grep -q $PROP $LMKD\
   PROP=$PROP2
 fi
 CUR=`getprop $PROP`
-ui_print "- Current $PROP"
+ui_print "- Current"
+ui_print "  $PROP"
 ui_print "  = $CUR"
 ui_print " "
 if [ "$VAL" ] && [ "$VAL" != def ]; then
   if grep -q $PROP $LMKD; then
-    ui_print "- Changes $PROP"
-    ui_print "  to $VAL"
+    if [ "$VAL" == unset ]; then
+      ui_print "- Unsets"
+      ui_print "  $PROP"
+    else
+      ui_print "- Changes"
+      ui_print "  $PROP"
+      ui_print "  to $VAL"
+    fi
     if [ "$BOOTMODE" == true ]; then
       resetprop -p --delete $PROP
-      resetprop -n $PROP "$VAL"
+      if [ "$VAL" != unset ]; then
+        resetprop -n $PROP "$VAL"
+      fi
       resetprop lmkd.reinit 1
       ui_print "  This change does not require reboot."
     fi
@@ -492,16 +504,25 @@ if ! grep -q $PROP $LMKD\
   PROP=$PROP2
 fi
 CUR=`getprop $PROP`
-ui_print "- Current $PROP"
+ui_print "- Current"
+ui_print "  $PROP"
 ui_print "  = $CUR"
 ui_print " "
 if [ "$VAL" ] && [ "$VAL" != def ]; then
   if grep -q $PROP $LMKD; then
-    ui_print "- Changes $PROP"
-    ui_print "  to $VAL"
+    if [ "$VAL" == unset ]; then
+      ui_print "- Unsets"
+      ui_print "  $PROP"
+    else
+      ui_print "- Changes"
+      ui_print "  $PROP"
+      ui_print "  to $VAL"
+    fi
     if [ "$BOOTMODE" == true ]; then
       resetprop -p --delete $PROP
-      resetprop -n $PROP "$VAL"
+      if [ "$VAL" != unset ]; then
+        resetprop -n $PROP "$VAL"
+      fi
       resetprop lmkd.reinit 1
       ui_print "  This change does not require reboot."
     fi
@@ -546,16 +567,25 @@ if ! grep -q $PROP $LMKD\
   PROP=$PROP2
 fi
 CUR=`getprop $PROP`
-ui_print "- Current $PROP"
+ui_print "- Current"
+ui_print "  $PROP"
 ui_print "  = $CUR"
 ui_print " "
 if [ "$VAL" ] && [ "$VAL" != def ]; then
   if grep -q $PROP $LMKD; then
-    ui_print "- Changes $PROP"
-    ui_print "  to $VAL"
+    if [ "$VAL" == unset ]; then
+      ui_print "- Unsets"
+      ui_print "  $PROP"
+    else
+      ui_print "- Changes"
+      ui_print "  $PROP"
+      ui_print "  to $VAL"
+    fi
     if [ "$BOOTMODE" == true ]; then
       resetprop -p --delete $PROP
-      resetprop -n $PROP "$VAL"
+      if [ "$VAL" != unset ]; then
+        resetprop -n $PROP "$VAL"
+      fi
       resetprop lmkd.reinit 1
       ui_print "  This change does not require reboot."
     fi
@@ -673,16 +703,25 @@ if ! grep -q $PROP $LMKD\
   PROP=$PROP2
 fi
 CUR=`getprop $PROP`
-ui_print "- Current $PROP"
+ui_print "- Current"
+ui_print "  $PROP"
 ui_print "  = $CUR"
 ui_print " "
 if [ "$VAL" ] && [ "$VAL" != def ]; then
   if grep -q $PROP $LMKD; then
-    ui_print "- Changes $PROP"
-    ui_print "  to $VAL"
+    if [ "$VAL" == unset ]; then
+      ui_print "- Unsets"
+      ui_print "  $PROP"
+    else
+      ui_print "- Changes"
+      ui_print "  $PROP"
+      ui_print "  to $VAL"
+    fi
     if [ "$BOOTMODE" == true ]; then
       resetprop -p --delete $PROP
-      resetprop -n $PROP "$VAL"
+      if [ "$VAL" != unset ]; then
+        resetprop -n $PROP "$VAL"
+      fi
       resetprop lmkd.reinit 1
       ui_print "  This change does not require reboot."
     fi
@@ -720,16 +759,25 @@ if ! grep -q $PROP $LMKD\
   PROP=$PROP2
 fi
 CUR=`getprop $PROP`
-ui_print "- Current $PROP"
+ui_print "- Current"
+ui_print "  $PROP"
 ui_print "  = $CUR"
 ui_print " "
 if [ "$VAL" ] && [ "$VAL" != def ]; then
   if grep -q $PROP $LMKD; then
-    ui_print "- Changes $PROP"
-    ui_print "  to $VAL"
+    if [ "$VAL" == unset ]; then
+      ui_print "- Unsets"
+      ui_print "  $PROP"
+    else
+      ui_print "- Changes"
+      ui_print "  $PROP"
+      ui_print "  to $VAL"
+    fi
     if [ "$BOOTMODE" == true ]; then
       resetprop -p --delete $PROP
-      resetprop -n $PROP "$VAL"
+      if [ "$VAL" != unset ]; then
+        resetprop -n $PROP "$VAL"
+      fi
       resetprop lmkd.reinit 1
       ui_print "  This change does not require reboot."
     fi

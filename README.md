@@ -2,12 +2,15 @@
 
 ## Descriptions
 - Enables and resizes ZRAM swap to 100% of RAM size
-- Configures ZRAM Swap settings
-- Please read Optionals bellow if you want any different configurations
+- Please read Optionals bellow if you want to configure ZRAM swap settings
 - What's ZRAM Swap? Read this: https://t.me/ryukinotes/58. For more detailed information, please read it at Android & Google documentation instead!
 - This module is a tool for advanced users only. There will never recommendations nor restrictions. All at user respective policies. Do not use this if you don't even know what is this! DwYOR!
 
 ## Changelog
+
+v3.6
+- Does not set swappiness to 100 by default
+- Add new optionals to unset lmk if it's set by default
 
 v3.5
 - Add zram.scrd & zram.low optionals
@@ -58,18 +61,11 @@ v2.7
 - Sets swap_util_max to 99 by default
 - Add new optionals
 
-v2.6
-- Delete thrashing_limit_critical removal (I think I misunderstood this property and removing it is not a good idea)
-- Shows currents at installation
-- Add Action button to see the results
-- Sets swap_util_max to 100 by default
-- Add a new optional
-
 ## Requirements
 Magisk or Kitsune Mask or KernelSU or Apatch installed
 
 ## Installation Guide & Download Link
-- Install this module https://devuploads.com/hdvnmnuviu8e via Magisk app or Kitsune Mask app or KernelSU app or Apatch app or Recovery if Magisk or Kitsune Mask installed
+- Install this module https://github.com/reiryuki/ZRAM-Swap-Configurator-Magisk-Module via Magisk app or Kitsune Mask app or KernelSU app or Apatch app or Recovery if Magisk or Kitsune Mask installed
 - Reboot (/proc/sys/vm/ and lmk changes does not require reboot)
 - Tap "Action" or run action.sh to see the results
 

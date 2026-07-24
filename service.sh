@@ -90,7 +90,9 @@ SFLPDEF=`getprop $PROP`
 SFLP=
 if [ "$SFLP" ]; then
   resetprop -p --delete $PROP
-  resetprop -n $PROP "$SFLP"
+  if [ "$SFLP" != unset ]; then
+    resetprop -n $PROP "$SFLP"
+  fi
 fi
 NAME=swap_util_max
 PROP=persist.device_config.lmkd_native.$NAME
@@ -103,7 +105,9 @@ SUMDEF=`getprop $PROP`
 SUM=
 if [ "$SUM" ]; then
   resetprop -p --delete $PROP
-  resetprop -n $PROP "$SUM"
+  if [ "$SUM" != unset ]; then
+    resetprop -n $PROP "$SUM"
+  fi
 fi
 NAME=swap_compression_ratio
 PROP=persist.device_config.lmkd_native.$NAME
@@ -116,7 +120,9 @@ SCRDEF=`getprop $PROP`
 SCR=
 if [ "$SCR" ]; then
   resetprop -p --delete $PROP
-  resetprop -n $PROP "$SCR"
+  if [ "$SCR" != unset ]; then
+    resetprop -n $PROP "$SCR"
+  fi
 fi
 NAME=swap_compression_ratio_div
 PROP=persist.device_config.lmkd_native.$NAME
@@ -129,7 +135,9 @@ SCRDDEF=`getprop $PROP`
 SCRD=
 if [ "$SCRD" ]; then
   resetprop -p --delete $PROP
-  resetprop -n $PROP "$SCRD"
+  if [ "$SCRD" != unset ]; then
+    resetprop -n $PROP "$SCRD"
+  fi
 fi
 NAME=medium
 PROP=persist.device_config.lmkd_native.$NAME
@@ -142,7 +150,9 @@ MEDDEF=`getprop $PROP`
 MED=
 if [ "$MED" ]; then
   resetprop -p --delete $PROP
-  resetprop -n $PROP "$MED"
+  if [ "$MED" != unset ]; then
+    resetprop -n $PROP "$MED"
+  fi
 fi
 NAME=low
 PROP=persist.device_config.lmkd_native.$NAME
@@ -155,7 +165,9 @@ LOWDEF=`getprop $PROP`
 LOW=
 if [ "$LOW" ]; then
   resetprop -p --delete $PROP
-  resetprop -n $PROP "$LOW"
+  if [ "$LOW" != unset ]; then
+    resetprop -n $PROP "$LOW"
+  fi
 fi
 if [ "$SFLP" ] || [ "$SUM" ] || [ "$SCR" ] || [ "$SCRD" ]\
 || [ "$MED" ] || [ "$LOW" ]; then
