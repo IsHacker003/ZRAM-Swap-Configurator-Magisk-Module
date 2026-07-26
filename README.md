@@ -8,6 +8,9 @@
 
 ## Changelog
 
+v3.7
+- Fix failed to set swappiness at boot in some ROMs
+
 v3.6
 - Does not set swappiness to 100 by default
 - Add new optionals to unset lmk if it's set by default
@@ -56,16 +59,11 @@ v2.8
 - Optional zram.swpr can only be set if zram.swpre=1
 - Sets swap_compression_ratio to 0 by default
 
-v2.7
-- Sets swap_free_low_percentage to 1 by default
-- Sets swap_util_max to 99 by default
-- Add new optionals
-
 ## Requirements
 Magisk or Kitsune Mask or KernelSU or Apatch installed
 
 ## Installation Guide & Download Link
-- Install this module https://devuploads.com/l9e5l38h5af6 via Magisk app or Kitsune Mask app or KernelSU app or Apatch app or Recovery if Magisk or Kitsune Mask installed
+- Install this module https://github.com/reiryuki/ZRAM-Swap-Configurator-Magisk-Module via Magisk app or Kitsune Mask app or KernelSU app or Apatch app or Recovery if Magisk or Kitsune Mask installed
 - Reboot (/proc/sys/vm/ and lmk changes does not require reboot)
 - Tap "Action" or run action.sh to see the results
 

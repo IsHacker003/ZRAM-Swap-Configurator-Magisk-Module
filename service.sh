@@ -47,12 +47,6 @@ until [ "`getprop sys.boot_completed`" == 1 ]; do
   sleep 1
 done
 
-# swappiness
-FILE=/proc/sys/vm/swappiness
-SWPSDEF=`cat $FILE`
-SWPS=
-[ "$SWPS" ] && echo "$SWPS" > $FILE
-
 # swap_ratio_enable
 FILE=/proc/sys/vm/swap_ratio_enable
 SWPREDEF=`cat $FILE`
@@ -174,6 +168,14 @@ if [ "$SFLP" ] || [ "$SUM" ] || [ "$SCR" ] || [ "$SCRD" ]\
   resetprop lmkd.reinit 1
 fi
 
+# wait
+sleep 15
+
+# swappiness
+FILE=/proc/sys/vm/swappiness
+SWPSDEF=`cat $FILE`
+SWPS=
+[ "$SWPS" ] && echo "$SWPS" > $FILE
 
 
 
