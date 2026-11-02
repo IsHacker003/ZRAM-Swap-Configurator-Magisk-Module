@@ -1,95 +1,88 @@
 # ZRAM Swap Configurator Magisk Module
 
-## Descriptions
-- Enables and resizes ZRAM swap to 100% of RAM size
-- Please read Optionals bellow if you want to configure ZRAM swap settings
-- What's ZRAM Swap? Read this: https://t.me/ryukinotes/58. For more detailed information, please read it at Android & Google documentation instead!
-- This module is a tool for advanced users only. There will never recommendations nor restrictions. All at user respective policies. Do not use this if you don't even know what is this! DwYOR!
+## Description
+
+- Enables ZRAM swap and resizes it to 100% of RAM by default
+- Want to tweak it? See [Optionals](#optionals)
+- New to ZRAM? Read [What is ZRAM Swap?](Docs/what-is-zram-swap.md), or the Android and Linux kernel docs for the full picture
+
+> [!WARNING]
+> This module is for advanced users. It makes no recommendations and enforces no limits, so you're responsible for what you set. If you don't know what ZRAM is, don't use it. Use at your own risk.
+
+## Requirements
+
+Magisk, Kitsune Mask, KernelSU or APatch
+
+## Installation
+
+1. Download the latest zip from [Releases](https://github.com/IsHacker003/ZRAM-Swap-Configurator-Magisk-Module/releases).
+2. Install it from your root manager app, or from recovery if you use Magisk or Kitsune Mask.
+3. Reboot. Changes to `/proc/sys/vm/` and LMK settings apply without a reboot.
+4. Tap **Action** (or run `action.sh`) to see the results.
+
+## Optionals
+
+See [Docs/zram-configurator.md](Docs/zram-configurator.md).
+
+## Bug Reports
+
+Open an issue using the bug report template. Reports missing the required logs may be closed.
 
 ## Changelog
 
-v3.7
-- Fix failed to set swappiness at boot in some ROMs
+### v3.7
+- Fix swappiness failing to set at boot on some ROMs
 
-v3.6
-- Does not set swappiness to 100 by default
-- Add new optionals to unset lmk if it's set by default
+### v3.6
+- Stop setting swappiness to 100 by default
+- Add optionals to unset LMK values that are set by default
 
-v3.5
-- Add zram.scrd & zram.low optionals
-- Prior to use persist.device_config.lmkd_native. instead of ro.lmk. if supported
+### v3.5
+- Add `zram.scrd` and `zram.low` optionals
+- Prefer `persist.device_config.lmkd_native.` over `ro.lmk.` when supported
 
-v3.4
-- Add zram.med optional
-- Fix wrong logic while storing default values if they don't yet exist
-- Remove unimportant files
+### v3.4
+- Add `zram.med` optional
+- Fix logic for storing default values when they don't exist yet
+- Remove unneeded files
 
-v3.3
-- ZRAM does not wait for boot completed to fix lags on boot
-- Remove zram.fix optional
+### v3.3
+- Apply ZRAM without waiting for boot completion, fixing lag on boot
+- Remove `zram.fix` optional
 
-v3.2
-- Stores default values to /data/adb/modules/$MODID/debug.log if they don't yet exist
+### v3.2
+- Store default values in `/data/adb/modules/$MODID/debug.log` if they don't exist yet
 
-v3.1
-- swapoff max try 20 times
-- Fix failed swapon
-- Shows /proc/swaps
-- Restores swap_\* without reboot if the optionals are def or not set
+### v3.1
+- Retry `swapoff` up to 20 times
+- Fix `swapon` failing
+- Show `/proc/swaps`
+- Restore `swap_*` values without a reboot when optionals are `def` or unset
 
-v3.0
-- BOOTMODE detection
-- Parameters support detection
-- Changes of swap_free_low_percentage, swap_util_max, & swap_compression_ratio does not require reboot
-- Restores without reboot if the optionals are def or not set
+### v3.0
+- Add BOOTMODE detection
+- Add parameter support detection
+- `swap_free_low_percentage`, `swap_util_max` and `swap_compression_ratio` changes no longer need a reboot
+- Restore defaults without a reboot when optionals are `def` or unset
 - Remove loop service
-- Resets module folder/files permissions at post-fs-data
-- Move _uninstall.log to /data/adb/logs/
+- Reset module folder/file permissions at post-fs-data
+- Move `_uninstall.log` to `/data/adb/logs/`
 
-v2.9
-- Fix wrong percentage swap method
-- Retry method max 10 times if swapoff is fail
-- Sets ZRAM size to 100% of RAM size by default
-- Does not set swap configurations by default except swappiness
-- Add some new Optionals
+### v2.9
+- Fix percentage-based swap sizing
+- Retry up to 10 times if `swapoff` fails
+- Set ZRAM size to 100% of RAM by default
+- Only set swappiness by default, leave other swap settings alone
+- Add new optionals
 
-v2.8
+### v2.8
 - Add a new optional
-- Does not change swap_ratio_enable and swap_ratio by default
-- Optional zram.swpr can only be set if zram.swpre=1
-- Sets swap_compression_ratio to 0 by default
+- Stop changing `swap_ratio_enable` and `swap_ratio` by default
+- `zram.swpr` now requires `zram.swpre=1`
+- Set `swap_compression_ratio` to 0 by default
 
-## Requirements
-Magisk or Kitsune Mask or KernelSU or Apatch installed
+## Credits
 
-## Installation Guide & Download Link
-- Install this module ~~https://bicolink.com/5sDTcq~~ (**Download from github releases**) via Magisk app or Kitsune Mask app or KernelSU app or Apatch app or Recovery if Magisk or Kitsune Mask installed
-- Reboot (/proc/sys/vm/ and lmk changes does not require reboot)
-- Tap "Action" or run action.sh to see the results
-
-## Download Tutorial
-~~https://t.me/ryukinotes/97~~
-
-## Optionals
-- https://t.me/ryukinotes/6
-- Global: https://t.me/ryukinotes/35
-
-## Troubleshootings
-Global: https://t.me/ryukinotes/34
-
-## Support & Bug Report
-- https://t.me/ryukinotes/54
-- If you don't do above, issues will be closed immediately
-
-## Credits and Contributors
+- Original module by [reiryuki](https://github.com/reiryuki)
 - https://t.me/androidryukimodsdiscussions
 - https://t.me/androidappsportdevelopment
-
-## Sponsors
-https://t.me/ryukinotes/25
-
-
-
-
-
-
